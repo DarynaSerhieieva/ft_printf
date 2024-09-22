@@ -1,9 +1,12 @@
-# Makefile NAME
+# Name of the library
 NAME = libft.a
 
 # Compiler and flags
 CC = cc
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -I$(INCLUDES)
+
+# Include directory
+INCLUDES = ../includes
 
 # Source files and object files
 SRC = ft_isalpha.c ft_isdigit.c ft_isalnum.c ft_isascii.c ft_isprint.c \
@@ -11,31 +14,31 @@ SRC = ft_isalpha.c ft_isdigit.c ft_isalnum.c ft_isascii.c ft_isprint.c \
 		ft_strlcat.c ft_toupper.c ft_tolower.c ft_strchr.c ft_strrchr.c \
 		ft_strncmp.c ft_memchr.c ft_memcmp.c ft_strnstr.c ft_atoi.c ft_calloc.c ft_strdup.c \
 		ft_substr.c ft_strjoin.c ft_strtrim.c ft_split.c ft_itoa.c ft_strmapi.c \
-		ft_striteri.c ft_putchar_fd.c ft_putstr_fd.c ft_putendl_fd.c ft_putnbr_fd.c /
-		get_next_line.c ft_printchar.c ft_printstr.c
+		ft_striteri.c ft_putchar_fd.c ft_putstr_fd.c ft_putendl_fd.c ft_putnbr_fd.c \
+		get_next_line.c ft_putchar.c ft_putstr.c
 OBJ = $(SRC:.c=.o)
 
 # Main target
 all: $(NAME)
 
-# Compile executable
+# Compile the library
 $(NAME): $(OBJ)
-	ar rcs $(NAME) $^
+	ar rcs $(NAME) $(OBJ)
 
-# Compile object files
+# Compile object files, using INCLUDES for header files
 %.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
 
-# Clean object files and executable
+# Clean object files
 clean:
 	rm -f $(OBJ)
 
-# Clean object files, executable, and any additional generated files
+# Clean object files and the library
 fclean: clean
 	rm -f $(NAME)
 
-# Rebuild the project
+# Rebuild the library from scratch
 re: fclean all
 
-# Phony targets
+# Phony targets to prevent conflicts
 .PHONY: all clean fclean re

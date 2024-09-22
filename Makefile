@@ -1,49 +1,48 @@
-# Makefile NAME
+# Variables
 NAME = libftprintf.a
-
-# Compiler and flags
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
 AR = ar rcs
 RM = rm -f
-
-# Source files
-SRC = ft_printf.c
-OBJ = $(SRC:.c=.o)
-
-# Header files
-HEADER = ft_printf.h
-
-# Libft variables
-LIBFT_DIR = ./libft
+SRC_DIR = src
+INCLUDE_DIR = includes
+LIBFT_DIR = libft
 LIBFT = $(LIBFT_DIR)/libft.a
-LIBFT_HEADER = $(LIBFT_DIR)/libft.h
+
+# Gather all .c files from src/ and subdirectories
+SRCS = $(shell find $(SRC_DIR) -name "*.c")
+OBJS = $(SRCS:.c=.o)
 
 # Rules
-all: $(LIBFT) $(NAME)
+all: $(NAME)
 
-# Compile executable
+$(NAME): $(LIBFT) $(OBJS)
+	@echo "Compiling $(NAME)..."
+	$(AR) $(NAME) $(OBJS) $(LIBFT)
+	@echo "$(NAME) has been created."
+
+# Compile .o files from .c files
+%.o: %.c
+	$(CC) $(CFLAGS) -I$(INCLUDE_DIR) -c $< -o $@
+
+# Compile libft library
 $(LIBFT):
-	@$(MAKE) -C $(LIBFT_DIR)
+	@echo "Compiling libft..."
+	$(MAKE) -C $(LIBFT_DIR)
 
-$(NAME): $(OBJ)
-	$(AR) $(NAME) $(OBJ) $(LIBFT)
-
-# Compile object files
-%.o: %.c $(HEADER) $(LIBFT_HEADER)
-	$(CC) $(CFLAGS) -I$(LIBFT_DIR) -c $< -o $@
-
-# Clean object files and executable
+# Clean object files
 clean:
-	$(RM) $(OBJ)
-	@$(MAKE) -C $(LIBFT_DIR) clean
+	@echo "Cleaning object files..."
+	$(RM) $(OBJS)
+	$(MAKE) -C $(LIBFT_DIR) clean
 
-# Clean object files, executable, and any additional generated files
+# Clean object files and the compiled library
 fclean: clean
+	@echo "Cleaning all compiled files..."
 	$(RM) $(NAME)
-	@$(MAKE) -C $(LIBFT_DIR) fclean
+	$(MAKE) -C $(LIBFT_DIR) fclean
 
-# Rebuild the project
+# Recompile everything from scratch
 re: fclean all
 
 # Phony targets
