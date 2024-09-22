@@ -8,7 +8,7 @@ AR = ar rcs
 RM = rm -f
 
 # Source files
-SRC = ft_printf.c file1.c file2.c  # Replace with your actual source files
+SRC = ft_printf.c
 OBJ = $(SRC:.c=.o)
 
 # Header files
