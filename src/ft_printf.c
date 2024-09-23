@@ -9,15 +9,20 @@ void	var_type(va_list args, const char fmt, int *leng)
 		(*leng)++;
 	}
 	else if (fmt == 's')
-		print_str(va_arg(args, char *), leng);
+		ft_print_str(va_arg(args, char *), leng);
 	else if (fmt == 'p')
-	{}
-	// else if (fmt == 'd')
-	// else if (fmt == 'i')
-	// else if (fmt == 'u')
-	// else if (fmt == 'x')
-	// else if (fmt == 'X')
-	// else if (fmt == '%')
+		ft_print_pointer((va_arg(args, void *)), leng);
+	else if (fmt == 'd' || fmt == 'i')
+		ft_print_decimal((va_arg(args, int)), leng);
+	else if (fmt == 'u')
+		ft_un_decimal((va_arg(args, unsigned int)), leng);
+	else if (fmt == 'x' || fmt == 'X')
+		ft_print_num_hex((va_arg(args, unsigned int)), fmt, leng);
+	else if (fmt == '%')
+	{
+		ft_putchar('%');
+		(*leng)++;
+	}
 }
 
 int	ft_printf(const char *fmt, ...)
