@@ -1,10 +1,19 @@
 #!/bin/bash
+
+# Run make to build libftprintf.a and libft.a
 make
+
+# Check if make succeeded
+if [ $? -ne 0 ]; then
+    echo "$(tput setaf 1)Make failed. Test FAILED$(tput sgr0)"
+    exit 1
+fi
+
 # Variables for paths
 ROOT_LIB="libftprintf.a"
 LIBFT_PATH="./libft"
 LIBFT_LIB="$LIBFT_PATH/libft.a"
-INCLUDE_PATH="./includs"
+INCLUDE_PATH="./includes"  # Fixed typo here
 
 # Compiler flags
 CFLAGS="-Wall -Wextra -Werror"
@@ -19,12 +28,12 @@ OUTPUT="main"
 # Compile the main.c with the two libraries and header files
 gcc $CFLAGS $INCLUDE_FLAGS -o $OUTPUT $MAIN_FILE $ROOT_LIB $LIBFT_LIB
 
-# Check exit status to determine pass or fail
+# Check exit status of gcc (compilation step)
 if [ $? -eq 0 ]; then
-    # Run test executable
-        ./main
-
-    # Check exit status to determine pass or fail
+    # Run the compiled program
+    ./main
+    
+    # Check exit status of the program
     if [ $? -eq 0 ]; then
         echo "$(tput setaf 2)Test PASSED$(tput sgr0)"
     else

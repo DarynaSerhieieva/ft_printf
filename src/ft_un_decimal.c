@@ -1,12 +1,26 @@
-#include "libftprintf.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_un_decimal.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dserhiei <dserhiei@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/09/24 15:23:43 by dserhiei          #+#    #+#             */
+/*   Updated: 2024/09/24 16:30:30 by dserhiei         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "ft_printf.h"
 #include "libft.h"
 
 static int
-	count_size(int n)
+	count_size(unsigned int n)
 {
 	int	i;
 
 	i = 0;
+	if (n >= 2147483647)
+		return (10);
 	while (n > 0)
 	{
 		n = n / 10;
@@ -32,7 +46,6 @@ char	*ft_unitoa(unsigned int num)
 		len--;
 	}
 	return (num_str);
-
 }
 
 void	ft_un_decimal(unsigned int num, int *leng)
@@ -47,4 +60,5 @@ void	ft_un_decimal(unsigned int num, int *leng)
 	num_str = ft_unitoa(num);
 	*leng += ft_strlen(num_str);
 	ft_putstr(num_str);
+	free(num_str);
 }

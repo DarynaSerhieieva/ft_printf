@@ -1,4 +1,4 @@
-#include "./includes/libftprintf.h"
+#include "./includes/ft_printf.h"
 #include "./includes/libft.h"
 
 int	main(void)
@@ -63,7 +63,7 @@ int	main(void)
 	printf("Result match your result is: %d and original: %d\n\n", size9, size10);
 
 	//test for an unsigned decimal (base 10) number.
-	int	numb3 = 42;
+	int	numb3 = 4294967295;
 
 	int size11 = ft_printf("Test for an unsigned decimal: %u\n", numb3);
 	int size12 = printf("Test for an unsigned decimal: %u\n", numb3);

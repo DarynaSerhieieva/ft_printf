@@ -1,4 +1,16 @@
-#include "libftprintf.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dserhiei <dserhiei@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/09/24 15:23:31 by dserhiei          #+#    #+#             */
+/*   Updated: 2024/09/24 15:23:31 by dserhiei         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "ft_printf.h"
 #include "libft.h"
 
 void	var_type(va_list args, const char fmt, int *leng)
