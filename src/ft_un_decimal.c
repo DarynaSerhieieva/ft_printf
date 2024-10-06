@@ -6,7 +6,7 @@
 /*   By: dserhiei <dserhiei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 15:23:43 by dserhiei          #+#    #+#             */
-/*   Updated: 2024/09/24 16:30:30 by dserhiei         ###   ########.fr       */
+/*   Updated: 2024/10/06 17:43:39 by dserhiei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,10 +55,10 @@ void	ft_un_decimal(unsigned int num, int *leng)
 	if (num == 0)
 	{
 		*leng += 1;
-		ft_putchar('0');
+		ft_putchar_fd('0', 1);
 	}
 	num_str = ft_unitoa(num);
 	*leng += ft_strlen(num_str);
-	ft_putstr(num_str);
+	ft_putstr_fd(num_str, 1);
 	free(num_str);
 }

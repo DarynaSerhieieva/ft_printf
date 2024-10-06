@@ -6,7 +6,7 @@
 /*   By: dserhiei <dserhiei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 15:23:31 by dserhiei          #+#    #+#             */
-/*   Updated: 2024/09/24 15:23:31 by dserhiei         ###   ########.fr       */
+/*   Updated: 2024/10/06 17:43:10 by dserhiei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	var_type(va_list args, const char fmt, int *leng)
 {
 	if (fmt == 'c')
 	{
-		ft_putchar(va_arg(args, int));
+		ft_putchar_fd(va_arg(args, int), 1);
 		(*leng)++;
 	}
 	else if (fmt == 's')
@@ -32,7 +32,7 @@ void	var_type(va_list args, const char fmt, int *leng)
 		ft_print_num_hex((va_arg(args, unsigned int)), fmt, leng);
 	else if (fmt == '%')
 	{
-		ft_putchar('%');
+		ft_putchar_fd('%', 1);
 		(*leng)++;
 	}
 }
@@ -48,7 +48,7 @@ int	ft_printf(const char *fmt, ...)
 	{
 		if (*fmt != '%')
 		{
-			ft_putchar(*fmt);
+			ft_putchar_fd(*fmt, 1);
 			leng++;
 		}
 		else
